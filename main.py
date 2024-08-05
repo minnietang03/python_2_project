@@ -10,6 +10,9 @@ class Player:
     def learn(self, my_move, their_move):
         pass
 
+class AllRockPlayer(Player):
+    def move(self):
+        return "rock"
 
 class RandomPlayer(Player):
     def move(self):
@@ -51,11 +54,11 @@ class CyclePlayer(Player):
 
 
 def beats(one, two):
-    return (
-        (one == "rock" and two == "scissors")
-        or (one == "scissors" and two == "paper")
-        or (one == "paper" and two == "rock")
-    )
+    return two in {
+        'rock':['scissors'],
+        'scissors':['paper'],
+        'paper':['rock']
+    }.get(one,[])
 
 
 class Game:
